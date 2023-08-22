@@ -41,7 +41,7 @@ if __name__ == "__main__":
     N = int(input("Enter a number whose square root is desired: "))
     n_0 = int(input("Enter an initial guess: "))
     epsilon = 0.01
-    print(babylonian_tech(
+    print("The square root of {} is {}".format(N, babylonian_tech(
         epsilon=epsilon,
         N=N,
-        n_prev=n_0))
+        n_prev=n_0)))
