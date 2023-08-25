@@ -1,5 +1,8 @@
 import cmath
 import numpy as np
+"""
+    This program gets the roots of a quadriatic equation.
+"""
 
 def get_determinant(a: int, b: int, c: int) -> int:
     """Get determinant of a quadriatic equation.

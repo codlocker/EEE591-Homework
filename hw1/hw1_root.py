@@ -40,8 +40,8 @@ def babylonian_tech(N: int, n_prev: float, epsilon: float) -> float:
 if __name__ == "__main__":
     N = int(input("Enter a number whose square root is desired: "))
     n_0 = int(input("Enter an initial guess: "))
-    epsilon = 0.01
+    EPSILON = 0.01
     print("The square root of {} is {}".format(N, babylonian_tech(
-        epsilon=epsilon,
+        epsilon=EPSILON,
         N=N,
         n_prev=n_0)))
