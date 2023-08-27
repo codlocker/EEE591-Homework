@@ -1,18 +1,17 @@
 from math import isqrt
 
-"""
-    This program calculates the prime numbers from 1 upto the given number.
-    The number given as input here is 10000.
-"""
+# This program calculates the prime numbers from 1 upto the given number.
+# The number given as input here is 10000.
 def get_primes(n: int) -> list[int]:
-    """Generate prime numbers for all numbers to at most n
+    
+    # Generate prime numbers for all numbers to at most n
 
-    Args:
-        n (int): the value till which prime numbers ae checked
+    # Args:
+    #     n (int): the value till which prime numbers ae checked
 
-    Returns:
-        list[int]: list of prime numbers
-    """
+    # Returns:
+    #     list[int]: list of prime numbers
+
     if n < 2:
         return []
     
