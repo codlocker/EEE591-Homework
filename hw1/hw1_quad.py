@@ -16,9 +16,9 @@ def get_discriminant(a: int, b: int, c: int) -> int:
     return b**2 - 4 * a * c
 
 if __name__ == "__main__":
-    a = int(input("Input coefficient a : "))
-    b = int(input("Input coefficient b : "))
-    c = int(input("Input coefficient c : "))
+    a = int(input("Input coefficient a: "))
+    b = int(input("Input coefficient b: "))
+    c = int(input("Input coefficient c: "))
     TOLERANCE = 1e-5
 
     if a == 0:
