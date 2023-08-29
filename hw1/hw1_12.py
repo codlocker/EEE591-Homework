@@ -1,4 +1,4 @@
-from math import isqrt
+import numpy as np
 
 # This program calculates the prime numbers from 1 upto the given number.
 # The number given as input here is 10000.
@@ -19,7 +19,7 @@ def get_primes(n: int) -> list[int]:
     is_prime[0] = False
     is_prime[1] = False
 
-    for i in range(2, isqrt(n + 1)):
+    for i in range(2, int(np.sqrt(n + 1))):
         if is_prime[i]:
             for x in range(i * i, n + 1, i):
                 is_prime[x] = False 
