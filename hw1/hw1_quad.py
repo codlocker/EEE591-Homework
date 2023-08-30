@@ -16,11 +16,20 @@ def get_discriminant(a: int, b: int, c: int) -> int:
     return b**2 - 4 * a * c
 
 if __name__ == "__main__":
-    a = int(input("Input coefficient a : "))
-    b = int(input("Input coefficient b : "))
-    c = int(input("Input coefficient c : "))
+    # Get user input for cefficient a and convert to integer
+    a = int(input("Input coefficient a: "))
+
+    # Get user input for cefficient b
+    b = int(input("Input coefficient b: "))
+
+    # Get user input for cefficient c
+    c = int(input("Input coefficient c: "))
+
+    # Tolerance is a constant that signifies how close the disriminant is to zero
+    # in case of floating point results.
     TOLERANCE = 1e-5
 
+    # Base cases for when a, b and c paramters are zero.
     if a == 0:
         if b == 0:
             print("x can take any value in the real number space.")
@@ -30,18 +39,21 @@ if __name__ == "__main__":
             print("Single Root :", root)
             exit(0)
 
-    det = get_discriminant(a, b, c)
-    delta = det - 0.0
+    # get the discriminant and compute the delta.
+    discriminant = get_discriminant(a, b, c)
+    delta = discriminant - 0.0
 
-    if det < 0 and abs(delta) > TOLERANCE:
-        root = cmath.sqrt(det)
+    # checks if the discriminant is positive or negative and compute the roots
+    # accordingly for displaying the roots to user.
+    if discriminant < 0 and abs(delta) > TOLERANCE:
+        root = cmath.sqrt(discriminant)
 
         rootA = (-b + root) / (2 * a)
         rootB = (-b - root) / (2 * a)
         print("Root 1:", rootA)
         print("Root 2:", rootB)
-    elif det > 0 and abs(delta) > TOLERANCE:
-        root = np.sqrt(det)
+    elif discriminant > 0 and abs(delta) > TOLERANCE:
+        root = np.sqrt(discriminant)
         rootA = (-b + root) / (2 * a)
         rootB = (-b - root) / (2 * a)
 

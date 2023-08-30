@@ -24,6 +24,9 @@ def babylonian_tech(N: int, n_prev: float, epsilon: float) -> float:
     #     float: Best possible square root.
     n_new = np.round((n_prev + N / n_prev) / 2, 2)
 
+    # Base clase: check the delta from epsilon to determine
+    # whether to recurse further or return the value rounded
+    # to 2 decimal places.
     if np.abs(n_new - n_prev) <= epsilon:
         return np.round(n_new, 2)
     else:
@@ -33,9 +36,16 @@ def babylonian_tech(N: int, n_prev: float, epsilon: float) -> float:
             epsilon= epsilon)
 
 if __name__ == "__main__":
+    # User provides the number whose square root is desired.
     N = int(input("Enter a number whose square root is desired: "))
+
+    # An initial guess is required for using the Babylonian technique.
     n_0 = int(input("Enter an initial guess: "))
+    
+    # This constant helps in computing the delta.
     EPSILON = 0.01
+
+    # Output format for the result.
     print("The square root of {} is {}".format(N, babylonian_tech(
         epsilon=EPSILON,
         N=N,
