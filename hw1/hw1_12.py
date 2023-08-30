@@ -35,3 +35,5 @@ def get_primes(n: int) -> list[int]:
 
 if __name__ == "__main__":
     print(get_primes(10000))
+
+    exit(0)

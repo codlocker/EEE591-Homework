@@ -50,3 +50,5 @@ if __name__ == "__main__":
         epsilon=EPSILON,
         number=number,
         n_prev=n_0)))
+    
+    exit(0)

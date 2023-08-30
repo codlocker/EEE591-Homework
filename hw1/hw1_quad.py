@@ -1,7 +1,9 @@
 import cmath
 import numpy as np
 
-# This program gets the roots of a quadriatic equation.
+########################################################
+# This program gets the roots of a quadriatic equation.#
+########################################################
 
 def get_discriminant(a: int, b: int, c: int) -> int:
     # Get discriminant of a quadriatic equation.
