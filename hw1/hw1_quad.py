@@ -48,17 +48,17 @@ if __name__ == "__main__":
     if discriminant < 0 and abs(delta) > TOLERANCE:
         root = cmath.sqrt(discriminant)
 
-        rootA = (-b + root) / (2 * a)
-        rootB = (-b - root) / (2 * a)
-        print("Root 1:", rootA)
-        print("Root 2:", rootB)
+        root_a = (-b + root) / (2 * a)
+        root_b = (-b - root) / (2 * a)
+        print("Root 1:", root_a)
+        print("Root 2:", root_b)
     elif discriminant > 0 and abs(delta) > TOLERANCE:
         root = np.sqrt(discriminant)
-        rootA = (-b + root) / (2 * a)
-        rootB = (-b - root) / (2 * a)
+        root_a = (-b + root) / (2 * a)
+        root_b = (-b - root) / (2 * a)
 
-        print("Root 1:", rootA)
-        print("Root 2:", rootB)
+        print("Root 1:", root_a)
+        print("Root 2:", root_b)
     elif abs(delta) < TOLERANCE:
         root = -b / (2 * a)
 

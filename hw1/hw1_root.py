@@ -12,7 +12,7 @@ import numpy as np
 # n = int(input("Enter n whose factorial you want to find:"))
 # print(factorial(n))
 
-def babylonian_tech(N: int, n_prev: float, epsilon: float) -> float:
+def babylonian_tech(number: int, n_prev: float, epsilon: float) -> float:
     # Use Babylonian technique to generate square root of a number.
 
     # Args:
@@ -22,7 +22,7 @@ def babylonian_tech(N: int, n_prev: float, epsilon: float) -> float:
 
     # Returns:
     #     float: Best possible square root.
-    n_new = np.round((n_prev + N / n_prev) / 2, 2)
+    n_new = np.round((n_prev + number / n_prev) / 2, 2)
 
     # Base clase: check the delta from epsilon to determine
     # whether to recurse further or return the value rounded
@@ -31,13 +31,13 @@ def babylonian_tech(N: int, n_prev: float, epsilon: float) -> float:
         return np.round(n_new, 2)
     else:
         return babylonian_tech(
-            N=N,
+            number=number,
             n_prev=n_new,
             epsilon= epsilon)
 
 if __name__ == "__main__":
     # User provides the number whose square root is desired.
-    N = int(input("Enter a number whose square root is desired: "))
+    number = int(input("Enter a number whose square root is desired: "))
 
     # An initial guess is required for using the Babylonian technique.
     n_0 = int(input("Enter an initial guess: "))
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     EPSILON = 0.01
 
     # Output format for the result.
-    print("The square root of {} is {}".format(N, babylonian_tech(
+    print("The square root of {} is {}".format(number, babylonian_tech(
         epsilon=EPSILON,
-        N=N,
+        number=number,
         n_prev=n_0)))
