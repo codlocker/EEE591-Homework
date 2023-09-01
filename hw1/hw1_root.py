@@ -24,7 +24,7 @@ def babylonian_tech(number: int, n_prev: float, epsilon: float) -> float:
     #     float: Best possible square root.
     n_new = np.round((n_prev + number / n_prev) / 2, 2)
 
-    # Base clase: check the delta from epsilon to determine
+    # Base class: check the delta from epsilon to determine
     # whether to recurse further or return the value rounded
     # to 2 decimal places.
     if np.abs(n_new - n_prev) <= epsilon:

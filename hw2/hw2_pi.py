@@ -4,7 +4,7 @@ import numpy as np
 ##############################################################################
 # This program computes the integral of a function using using integration by#
 # substitution. Here we replace x with tan^2 (theta) as per the question.    #
-# The liits are also changed from 0 to infinity to inverse tan values of it. #
+# The limits are also changed from 0 to infinity to inverse tan values of it.#
 ##############################################################################
 if __name__ == "__main__":
     integrand = lambda theta : (2 * np.tan(theta) * np.power(1 / np.cos(theta), 2)) / ((1 + np.power(np.tan(theta), 2)) * np.tan(theta))
