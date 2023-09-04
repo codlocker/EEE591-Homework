@@ -11,4 +11,4 @@
 
 ### :snake: Requirements
 
-![requirements.txt](./requirements.txt)
+- [requirements.txt](./requirements.txt)
