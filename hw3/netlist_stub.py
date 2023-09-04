@@ -27,9 +27,18 @@ import comp_constants as COMP          # needed for the common constants
 def get_dimensions(netlist):           # pass in the netlist
 
     ### EXTRA STUFF HERE!
+    nodes = set()
+    volt_nodes = 0
 
-#    print(' Nodes ', node_cnt, ' Voltage sources ', volt_cnt)
-    return node_cnt,volt_cnt
+    for net in netlist:
+        if net[0] == 1:
+            volt_nodes += 1
+        elif net[0] == 0:
+            nodes.add(net[2])
+            nodes.add(net[3])
+
+    print(' Nodes ', len(nodes), ' Voltage sources ', volt_nodes)
+    return len(nodes), volt_nodes
 
 ################################################################################
 # Function to stamp the components into the netlist                            #
@@ -42,10 +51,12 @@ def get_dimensions(netlist):           # pass in the netlist
 #   node_cnt: the number of rows in the admittance matrix                      #
 ################################################################################
 
-def stamper(y_add,netlist,currents,node_cnt):
+def stamper(y_add, netlist, currents, node_n, node_v):
     # return the total number of rows in the matrix for
     # error checking purposes
     # add 1 for each voltage source...
+
+    voltage_index = 0
 
     for comp in netlist:                  # for each component...
         #print(' comp ', comp)            # which one are we handling...
@@ -55,13 +66,34 @@ def stamper(y_add,netlist,currents,node_cnt):
         i = comp[COMP.I] - 1
         j = comp[COMP.J] - 1
 
-        if ( comp[COMP.TYPE] == COMP.R ):           # a resistor
-            if (i >= 0):                            # add on the diagonal
-                y_add[i,i] += 1.0/comp[COMP.VAL]
-            
-            #EXTRA STUFF HERE!
+        if comp[COMP.TYPE] == COMP.R:           # a resistor
+            if i >= 0:
+                y_add[i, i] += 1.0 / comp[COMP.VAL]
+            if j >= 0:
+                y_add[j, j] += 1.0 / comp[COMP.VAL]
+            if i >= 0 and j >= 0:                            # add on the diagonal
+                y_add[i, j] -= 1.0 / comp[COMP.VAL]
+                y_add[j, i] -= 1.0 / comp[COMP.VAL]
+        elif comp[COMP.TYPE] == COMP.IS:
+            if i >= 0:
+                currents[i] -= comp[COMP.VAL]
+            elif j >= 0:
+                currents[j] += comp[COMP.VAL]
+        elif comp[COMP.TYPE] == COMP.VS:
+            currents[node_n + voltage_index] = comp[COMP.VAL]
+            if i >= 0:
+                y_add[node_n + voltage_index][i] = 1
+                y_add[i][node_n + voltage_index] = 1
+            elif j >= 0:
+                y_add[node_n + voltage_index][j] = -1
+                y_add[j][node_n + voltage_index] = -1
+            voltage_index += 1
 
-    return node_cnt  # should be same as number of rows!
+    print(admittance_matrix)
+    # print(voltage_matrix)
+    print(current_matrix)
+
+    return node_n + node_v  # should be same as number of rows!
 
 ################################################################################
 # Start the main program now...                                                #
@@ -76,3 +108,23 @@ for index in range(len(netlist)):
 print("\n")
 
 #EXTRA STUFF HERE!
+node_n, node_v = get_dimensions(netlist=netlist)
+admittance_matrix = np.zeros((node_n + node_v - 1, node_n + node_v - 1))
+voltage_matrix = np.zeros((node_n + node_v - 1, 1))
+current_matrix = np.zeros((node_n + node_v - 1, 1))
+
+print("Shape : Admittance Matrix", admittance_matrix.shape)
+print("Shape : Voltage Matrix", voltage_matrix.shape)
+print("Shape : Current Matrix", current_matrix.shape)
+
+stamper(
+    currents=current_matrix,
+    netlist=netlist,
+    y_add=admittance_matrix,
+    node_n=node_n - 1,
+    node_v=node_v
+)
+
+voltage_matrix = np.matmul(np.linalg.inv(admittance_matrix), current_matrix)
+
+print(voltage_matrix)
