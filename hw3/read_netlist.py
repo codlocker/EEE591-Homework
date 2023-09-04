@@ -18,7 +18,9 @@ from sys import exit             # needed to exit on error
 
 def read_netlist():              # read a netlist - no input argument!
     filename=input("enter netlist text file name: ")      # ask for the netlist
-    #print(filename)                                      # debug statement
+    # filename = "m3_currents.txt"
+    # filename = "m3_voltages.txt"
+    # print(filename)                                      # debug statement
     fh = open(filename,"r")                               # open the file
     lines = fh.readlines()                                # read the file
     fh.close()                                            # close the file
