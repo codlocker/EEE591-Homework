@@ -7,7 +7,7 @@ import numpy as np
 # The limits are also changed from 0 to infinity to inverse tan values of it.#
 ##############################################################################
 if __name__ == "__main__":
-    # Refer to attached image file for the substitution that forms this integrand 
+    # Refer to attached image file (hw2_pi_substitution.jpeg) for the substitution that forms this integrand 
     integrand = lambda z : 1 / np.sqrt(z * (1 - z))
 
     # Integration limits

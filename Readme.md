@@ -6,6 +6,7 @@
 2. [Homework](./hw2/)
     - [Questions](./hw2/hw2_pi.pdf)
     - ![Result of polyomial ques](./hw2/Poly.png)
+    - ![Integration by substitution](./hw2/hw2_pi_substitution.jpeg)
 
 
 
