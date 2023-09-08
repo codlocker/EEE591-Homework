@@ -3,8 +3,8 @@ import numpy as np
 
 ##############################################################################
 # This program computes the integral of a function using using integration by#
-# substitution. Here we replace x with tan^2 (theta) as per the question.    #
-# The limits are also changed from 0 to infinity to inverse tan values of it.#
+# substitution. Here we replace x with z / (1-z) as per the book.            #
+# The limits are also changed from 0 to 1 with the substituted result.       #
 ##############################################################################
 if __name__ == "__main__":
     # Refer to attached image file (hw2_pi_substitution.jpeg) for the substitution that forms this integrand 
