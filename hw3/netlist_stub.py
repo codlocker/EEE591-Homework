@@ -90,7 +90,11 @@ def stamper(y_add, netlist, currents, node_n, node_v):
             voltage_index += 1
 
     print(admittance_matrix)
+<<<<<<< Updated upstream
     # print(voltage_matrix)
+=======
+    print(voltage_matrix)
+>>>>>>> Stashed changes
     print(current_matrix)
 
     return node_n + node_v  # should be same as number of rows!
