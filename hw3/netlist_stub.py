@@ -68,18 +68,21 @@ def stamper(y_add, netlist, currents, node_n, node_v):
 
         if comp[COMP.TYPE] == COMP.R:           # a resistor
             if i >= 0:
-                y_add[i, i] += 1.0 / comp[COMP.VAL]
+                y_add[i, i] += 1.0 / comp[COMP.VAL]         # add on the diagonal
             if j >= 0:
                 y_add[j, j] += 1.0 / comp[COMP.VAL]
-            if i >= 0 and j >= 0:                            # add on the diagonal
+            if i >= 0 and j >= 0:                            
                 y_add[i, j] -= 1.0 / comp[COMP.VAL]
                 y_add[j, i] -= 1.0 / comp[COMP.VAL]
-        elif comp[COMP.TYPE] == COMP.IS:
+        elif comp[COMP.TYPE] == COMP.IS: # a current source
+            # Add on the current column
             if i >= 0:
                 currents[i] -= comp[COMP.VAL]
             elif j >= 0:
                 currents[j] += comp[COMP.VAL]
-        elif comp[COMP.TYPE] == COMP.VS:
+        elif comp[COMP.TYPE] == COMP.VS: # a voltage source
+            # Add on the newest row created for the matrix and continue for
+            # voltage source.
             currents[node_n + voltage_index] = comp[COMP.VAL]
             if i >= 0:
                 y_add[node_n + voltage_index][i] = 1
@@ -89,13 +92,9 @@ def stamper(y_add, netlist, currents, node_n, node_v):
                 y_add[j][node_n + voltage_index] = -1
             voltage_index += 1
 
-    print(admittance_matrix)
-<<<<<<< Updated upstream
+    # print(admittance_matrix)
     # print(voltage_matrix)
-=======
-    print(voltage_matrix)
->>>>>>> Stashed changes
-    print(current_matrix)
+    # print(current_matrix)
 
     return node_n + node_v  # should be same as number of rows!
 
@@ -108,18 +107,22 @@ netlist = read_netlist()
 
 # Print the netlist so we can verify we've read it correctly
 for index in range(len(netlist)):
-    print(netlist[index])
-print("\n")
+    print(netlist[index], sep='\n')
 
 #EXTRA STUFF HERE!
+# Get the dimensions of the matrix formed from the given netlist
 node_n, node_v = get_dimensions(netlist=netlist)
+
+# Initialize and set the admittance, voltage and current matrix.
+# The size are set as node_n + node_v - 1 because we are removing the Ground Node from
+# the calculation.
 admittance_matrix = np.zeros((node_n + node_v - 1, node_n + node_v - 1))
 voltage_matrix = np.zeros((node_n + node_v - 1, 1))
 current_matrix = np.zeros((node_n + node_v - 1, 1))
 
-print("Shape : Admittance Matrix", admittance_matrix.shape)
-print("Shape : Voltage Matrix", voltage_matrix.shape)
-print("Shape : Current Matrix", current_matrix.shape)
+# print("Shape : Admittance Matrix", admittance_matrix.shape)
+# print("Shape : Voltage Matrix", voltage_matrix.shape)
+# print("Shape : Current Matrix", current_matrix.shape)
 
 stamper(
     currents=current_matrix,
