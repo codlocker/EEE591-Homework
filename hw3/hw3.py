@@ -134,4 +134,4 @@ stamper(
 
 voltage_matrix = np.matmul(np.linalg.inv(admittance_matrix), current_matrix)
 
-print(voltage_matrix)
+print(np.transpose(voltage_matrix))
