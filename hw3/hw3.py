@@ -92,9 +92,9 @@ def stamper(y_add, netlist, currents, node_n, node_v):
                 y_add[j][node_n + voltage_index] = -1
             voltage_index += 1
 
-    # print(admittance_matrix)
-    # print(voltage_matrix)
-    # print(current_matrix)
+    # print("Admittance Matrix: ", admittance_matrix)
+    # print("Voltage Matrix: ", voltage_matrix)
+    # print("Current Matrix: ", current_matrix)
 
     return node_n + node_v  # should be same as number of rows!
 
@@ -104,10 +104,6 @@ def stamper(y_add, netlist, currents, node_n, node_v):
 
 # Read the netlist!
 netlist = read_netlist()
-
-# Print the netlist so we can verify we've read it correctly
-for index in range(len(netlist)):
-    print(netlist[index], sep='\n')
 
 #EXTRA STUFF HERE!
 # Get the dimensions of the matrix formed from the given netlist
