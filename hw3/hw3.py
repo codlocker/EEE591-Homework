@@ -92,9 +92,8 @@ def stamper(y_add, netlist, currents, node_n, node_v):
                 y_add[j][node_n + voltage_index] = -1
             voltage_index += 1
 
-    # print("Admittance Matrix: ", admittance_matrix)
-    # print("Voltage Matrix: ", voltage_matrix)
-    # print("Current Matrix: ", current_matrix)
+    print("Admittance Matrix:\n", admittance_matrix)
+    print("Current Matrix:\n", current_matrix)
 
     return node_n + node_v  # should be same as number of rows!
 
@@ -130,4 +129,4 @@ stamper(
 
 voltage_matrix = np.matmul(np.linalg.inv(admittance_matrix), current_matrix)
 
-print(np.transpose(voltage_matrix))
+print("Voltage Matrix:\n", np.transpose(voltage_matrix))
