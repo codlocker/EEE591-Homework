@@ -37,7 +37,7 @@ def get_dimensions(netlist):           # pass in the netlist
             nodes.add(net[2])
             nodes.add(net[3])
 
-    print(' Nodes ', len(nodes), ' Voltage sources ', volt_nodes)
+    # print(' Nodes ', len(nodes), ' Voltage sources ', volt_nodes)
     return len(nodes), volt_nodes
 
 ################################################################################
@@ -92,8 +92,8 @@ def stamper(y_add, netlist, currents, node_n, node_v):
                 y_add[j][node_n + voltage_index] = -1
             voltage_index += 1
 
-    print("Admittance Matrix:\n", admittance_matrix)
-    print("Current Matrix:\n", current_matrix)
+    # print("Admittance Matrix:\n", admittance_matrix)
+    # print("Current Matrix:\n", current_matrix)
 
     return node_n + node_v  # should be same as number of rows!
 
@@ -129,4 +129,4 @@ stamper(
 
 voltage_matrix = np.matmul(np.linalg.inv(admittance_matrix), current_matrix)
 
-print("Voltage Matrix:\n", np.transpose(voltage_matrix))
+print(voltage_matrix)
