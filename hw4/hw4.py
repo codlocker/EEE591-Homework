@@ -3,10 +3,13 @@ import numpy as np
 import tkinter as tk
 from tkinter import ttk
 
+# Calculate the noise from the standard deviation
 def calculate_noise(sigma: float):
     noise = (sigma / 100) * np.random.randn(MAX_YEARS)
     return np.asarray(noise)
 
+# calulate the wealth given the current wealth
+# using the contribution and retirement age.
 def calculate_wealth(
         curr_wealth: float,
         spend_at_retirement: float,
@@ -16,7 +19,10 @@ def calculate_wealth(
         years_to_retire: int,
         yearly_contrib: float, 
         noise: float):
+    # Initilize new wealth
     new_wealth = 0
+
+    # Conditions for updating current wealth
     if age <= years_of_contrib:
         new_wealth = curr_wealth * (1 + rate / 100 + noise) + yearly_contrib
     elif age > years_of_contrib and age <= years_to_retire:
@@ -29,7 +35,7 @@ def calculate_wealth(
     # print(new_wealth)
     return 0 if new_wealth <= 0 else new_wealth
 
-
+# Calculate accumulated wealth
 def calculate_accumulated_wealth(
         m1: tk.Entry,
         m2: tk.Entry,
@@ -39,6 +45,7 @@ def calculate_accumulated_wealth(
         m6: tk.Entry,
         l1: tk.Label):
     try:
+        # Get the user inputs from the Entity.
         mean_return = float(m1.get())
         stddev_return = float(m2.get())
         yearly_contrib = float(m3.get())
@@ -48,6 +55,7 @@ def calculate_accumulated_wealth(
 
         wealth = []
 
+        # Run the entire for 10 times.
         for i in range(10):
             noise = calculate_noise(
                 sigma=stddev_return)
@@ -64,22 +72,26 @@ def calculate_accumulated_wealth(
                     years_of_contrib=no_of_years_contrib
                 )
 
+                # New wealth is zero then we break of current iteration.
+                # Wealth cant be negative.
                 if new_wealth > 0:
                     curr_wealth.append(new_wealth)
                 else:
                     break
-            print("No. of entries in wealth: ", len(curr_wealth))
+
+            # print("No. of entries in wealth: ", len(curr_wealth))
+            # Plot the current wealth in the graph.
             plt.plot(
                 list(range(len(curr_wealth))), curr_wealth, marker='x')
             
             wealth.append(curr_wealth[-1])
 
-        print(wealth)
-
         mean_wealth = f"{int(np.mean(wealth)): ,}"
 
+        # Update the mean wealth in the text label.
         l1.config(text=mean_wealth)
         
+        # Graph the x-y details for the graph.
         plt.title('Wealth over 70 years')
         plt.xlabel("years")
         plt.xticks(np.arange(0, 71, 5))
@@ -94,6 +106,7 @@ if __name__ == "__main__":
     # GUI Window
     root = tk.Tk()
     
+    # Initialize the variables that is placeholder for the text in the input. 
     mean_return = tk.DoubleVar()
     stddev_return = tk.DoubleVar()
     yearly_contrib = tk.DoubleVar()
@@ -155,5 +168,8 @@ if __name__ == "__main__":
             ret_weath_wgt)).grid(column=0, row=7)
     
     ttk.Button(frm, text="Quit", command=root.destroy).grid(column=1, row=7)
+
+    # Register event.
     root.register(calculate_accumulated_wealth)
+    # Run the mainloop.
     root.mainloop()
