@@ -11,6 +11,10 @@
 3. [Homework 3](./hw3/)
     - ![Results of the run](./hw3/HW3-results.PNG)
 
+4. [Homework 4](./hw4/)
+    - ![UI view](./hw4/UI.png)
+    - ![Results](./hw4/Plot.png)
+
 
 ### :snake: Requirements
 
