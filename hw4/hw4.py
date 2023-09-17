@@ -94,7 +94,7 @@ def calculate_accumulated_wealth(
         # Graph the x-y details for the graph.
         plt.title('Wealth over 70 years')
         plt.xlabel("years")
-        plt.xticks(np.arange(0, 71, 5))
+        plt.xticks(np.arange(0, 71, 10))
         plt.ylabel("wealth")
         plt.show()
 
