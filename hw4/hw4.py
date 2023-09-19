@@ -89,7 +89,7 @@ def calculate_accumulated_wealth(
         mean_wealth = f"{int(np.mean(wealth)): ,}"
 
         # Update the mean wealth in the text label.
-        l1.config(text=mean_wealth)
+        l1.config(text=f"${mean_wealth}")
         
         # Graph the x-y details for the graph.
         plt.title('Wealth over 70 years')
