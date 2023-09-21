@@ -106,6 +106,7 @@ MAX_YEARS = 70
 if __name__ == "__main__":
     # GUI Window
     root = tk.Tk()
+    root.resizable(0, 0)
     
     # Initialize the variables that is placeholder for the text in the input. 
     mean_return = tk.DoubleVar()
