@@ -56,11 +56,13 @@ def calculate_accumulated_wealth(
         wealth = []
 
         # Run the entire for 10 times.
-        for i in range(10):
+        for _ in range(10):
+            # Calculate noise for each iteration.
             noise = calculate_noise(
                 sigma=stddev_return)
             curr_wealth = [0]
             for j in range(1, 71):
+                # Invoke weath calculation function
                 new_wealth = calculate_wealth(
                     curr_wealth=curr_wealth[j-1],
                     spend_at_retirement=annual_spend,
@@ -102,7 +104,10 @@ def calculate_accumulated_wealth(
     except Exception as e:
         print(f'Exception : {e}')
 
+# CONSTANT for maximum years
 MAX_YEARS = 70
+
+# Start program
 if __name__ == "__main__":
     # GUI Window
     root = tk.Tk()
