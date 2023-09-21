@@ -84,7 +84,8 @@ def calculate_accumulated_wealth(
             plt.plot(
                 list(range(len(curr_wealth))), curr_wealth, marker='x')
             
-            wealth.append(curr_wealth[-1])
+            wealth.append(
+                curr_wealth[no_of_years_retire + 1] if (no_of_years_retire + 1) < len(curr_wealth) else 0)
 
         mean_wealth = f"{int(np.mean(wealth)): ,}"
 
@@ -154,7 +155,7 @@ if __name__ == "__main__":
     ret_weath_wgt = ttk.Label(frm , text='', padding=10)
     ret_weath_wgt.grid(column=1, row=6)
 
-    # Create 2 buttons for calculate and exit.
+    # Create 2 buttons for calculate and quit.
     ttk.Button(
         frm, 
         text="Calculate", 
