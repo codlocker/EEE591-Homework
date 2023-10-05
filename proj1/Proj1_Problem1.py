@@ -13,19 +13,24 @@
 
 import numpy as np
 import pandas as pd
+import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings
 warnings.filterwarnings('ignore')
 
-# Read the dataset
-heart_df = pd.read_csv('./heart1.csv')
+# matplotlib.use('TkAgg')
 
+# Read the dataset
+# heart_df = pd.read_csv(r'C:\\Users\\isahoo1\\OneDrive - Arizona State University\\Course Files\\EEE 591\\PythonProgs\\proj1\\heart1.csv')
+heart_df = pd.read_csv('heart1.csv')
 
 # ## CORRELATION ANALYSIS
 # Get the absolute correlation values for the dataset
 heart_corr = heart_df.corr().abs()
-
+print("=================")
+print("CORRELATION MATRIX")
+print(heart_corr)
 
 tri_corr = heart_corr * np.tri(*heart_corr.values.shape, k=-1).T
 correlation_array = tri_corr.unstack() # Unstack the correlation results into a Pandas series
@@ -64,13 +69,15 @@ print(cor_with_features[:10])
 print("=====================")
 print("Top 10 Correlation Values with a1p2 (the target variable)")
 cor_with_disease = get_relation_with_heart_disease(correlation_array, 2, True)
-print(cor_with_disease[:10])
+print(cor_with_disease)
 
 
 # ## COVARIANCE ANALYSIS
 # Covariance calculation
 heart_cov = heart_df.cov().abs()
-
+print("=================")
+print("COVARIANCE MATRIX")
+print(heart_cov)
 
 tri_cov_df = heart_cov * np.tri(*heart_cov.values.shape, k=-1).T
 cov_unstack = tri_cov_df.unstack() # Unstack the covariance results into a Pandas series
@@ -81,7 +88,7 @@ cov_unstack = cov_unstack.sort_values(ascending=False)
 cov_with_disease = get_relation_with_heart_disease(cov_unstack, 1, True)
 print("=====================")
 print("Top 10 Covariance Values with a1p2 (the target variable)")
-print(cov_with_disease[:10])
+print(cov_with_disease)
 
 
 # Get the covariance of the top 10 related and dependant variables overall.
@@ -92,7 +99,8 @@ print(cov_with_other_features[:10])
 
 
 # ## PAIR PLOT 
-sns.set() # set the appearance
-sns.pairplot(heart_df,height=1.5) # create the pair plots
-plt.show() # and show them
+sns.set(style='whitegrid', context='notebook')   # set the appearance
+sns.pairplot(heart_df,height=1.5)           # create the pair plots
+plt.savefig('result.png')
+plt.show(block=True)                                       # and show them
 
