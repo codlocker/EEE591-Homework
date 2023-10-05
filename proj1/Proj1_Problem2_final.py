@@ -42,50 +42,35 @@ X_test = scaler.transform(X_test)
 
 print("After scaling....")
 print(X_train)
-
 # ### 1. PERCEPTRON
 
 print("Running Perceptron Algorithm...")
-tol_accuracy_map = {1: 0, 1e-1: 0, 1e-2: 0, 1e-3: 0, 1e-4: 0}
 
 
-for key in tol_accuracy_map.keys():
-    clf = Perceptron(tol=key, random_state=0)
-    clf.fit(X_train, Y_train)
-    tol_accuracy_map[key] = round(clf.score(X_test, Y_test) * 100, 4) 
-
-print("Accuracy for different tolerance values (%): ", tol_accuracy_map)
+clf = Perceptron(tol=1, random_state=0)
+clf.fit(X_train, Y_train)
+print(f'Accuracy : {round(clf.score(X_test, Y_test) * 100, 4)}%') 
 
 
 # ### 2. LOGISTIC REGRESSION
 
 print("Running Logistic Regression...")
-solver_accuracy_map = {'lbfgs': 0, 'liblinear': 0, 'newton-cg': 0, 'sag': 0, 'saga': 0}
 
+clf = LogisticRegression(
+    solver='lbfgs', 
+    random_state=0)
 
-for solver in solver_accuracy_map.keys():
-    clf = LogisticRegression(solver=solver,
-            random_state=0)
-    clf.fit(X_train, Y_train)
-    solver_accuracy_map[solver] = round(clf.score(X_test, Y_test) * 100, 4)
-
-
-print("Accuracy for different solvers (%): ", solver_accuracy_map)
+clf.fit(X_train, Y_train)
+print(f"Accuracy : {round(clf.score(X_test, Y_test) * 100, 4)}%")
 
 
 # ### 3. SUPPORT VECTOR MACHINE
 
 print("Running Support Vector Machine...")
-kernel_accuracy_map = {'linear': 0, 'sigmoid': 0, 'rbf': 0}
 
-
-for key in kernel_accuracy_map.keys():
-    clf = SVC(kernel=key)
-    clf.fit(X_train, Y_train)
-    kernel_accuracy_map[key] = round(clf.score(X_test, Y_test) * 100, 4)
-
-
-print("Accuracy for different kernels (%): ", kernel_accuracy_map)
+clf = SVC(kernel='rbf')
+clf.fit(X_train, Y_train)
+print(f'Accuracy : {round(clf.score(X_test, Y_test) * 100, 4)}%')
 
 
 # ### 4. DECISION TREE LEARNING
@@ -95,7 +80,7 @@ clf = DecisionTreeClassifier()
 clf.fit(X_train, Y_train)
 
 
-print("Accuracy (%): ", round(clf.score(X_test, Y_test) * 100, 4))
+print(f"Accuracy : {round(clf.score(X_test, Y_test) * 100, 4)}%")
 
 
 # ### 5. RANDOM FOREST CLASSIFIER
@@ -105,24 +90,13 @@ clf = RandomForestClassifier(max_depth=4, random_state=4)
 clf.fit(X_train, Y_train)
 
 
-print("Accuracy (%) :", round(clf.score(X_test, Y_test) * 100, 4))
+print(f"Accuracy : {round(clf.score(X_test, Y_test) * 100, 4)}%")
 
 
 # ### 6. K-NEAREST NEIGHBOR
 
 print("Running K-NEAREST NEIGHBOR Algorithm...")
 knn_accuracies = defaultdict(int)
-for k in range(1, 100):
-    clf = KNeighborsClassifier(algorithm='auto', n_neighbors=k)
-    clf.fit(X_train, Y_train)
-    knn_accuracies[k] = round(clf.score(X_test, Y_test) * 100, 4)
-    
-max_accuracies = max(knn_accuracies, key=lambda x: knn_accuracies[x])
-kmax = f"No. of neighbors={max_accuracies} with accuracy of {knn_accuracies[max_accuracies]}%"
-print(kmax)
-
-
-
-min_accuracies = min(knn_accuracies, key=lambda x: knn_accuracies[x])
-kmin = f"No. of neighbors={min_accuracies} with accuracy of {knn_accuracies[min_accuracies]}%"
-print(kmin)
+clf = KNeighborsClassifier(algorithm='auto', n_neighbors=13)
+clf.fit(X_train, Y_train)
+print(f"Accuracy : {round(clf.score(X_test, Y_test) * 100, 4)}%")
