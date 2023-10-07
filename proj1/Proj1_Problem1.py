@@ -67,7 +67,7 @@ print(cor_with_features[:10])
 
 # Get correlation with the target feature of a1p2
 print("=====================")
-print("Top 10 Correlation Values with a1p2 (the target variable)")
+print("Correlation Values with a1p2 (the target variable)")
 cor_with_disease = get_relation_with_heart_disease(correlation_array, 2, True)
 print(cor_with_disease)
 
@@ -87,7 +87,7 @@ cov_unstack = cov_unstack.sort_values(ascending=False)
 # Get the covariance of the top 10 related to the target feature
 cov_with_disease = get_relation_with_heart_disease(cov_unstack, 1, True)
 print("=====================")
-print("Top 10 Covariance Values with a1p2 (the target variable)")
+print("Covariance Values with a1p2 (the target variable)")
 print(cov_with_disease)
 
 

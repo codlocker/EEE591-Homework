@@ -91,7 +91,7 @@ print("Accuracy for different kernels (%): ", kernel_accuracy_map)
 # ### 4. DECISION TREE LEARNING
 print("Running Decision Tree Algorithm...")
 
-clf = DecisionTreeClassifier()
+clf = DecisionTreeClassifier(criterion='entropy')
 clf.fit(X_train, Y_train)
 
 
