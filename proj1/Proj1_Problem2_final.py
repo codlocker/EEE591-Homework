@@ -76,7 +76,7 @@ print(f'Accuracy : {round(clf.score(X_test, Y_test) * 100, 4)}%')
 # ### 4. DECISION TREE LEARNING
 print("Running Decision Tree Algorithm...")
 
-clf = DecisionTreeClassifier()
+clf = DecisionTreeClassifier(criterion='entropy')
 clf.fit(X_train, Y_train)
 
 
