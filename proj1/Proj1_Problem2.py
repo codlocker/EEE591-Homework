@@ -100,12 +100,16 @@ print("Accuracy (%): ", round(clf.score(X_test, Y_test) * 100, 4))
 
 # ### 5. RANDOM FOREST CLASSIFIER
 
+kernel_accuracy_map = {'gini': 0, 'entropy': 0}
+
 print("Running Random Forest Classifier Algorithm...")
-clf = RandomForestClassifier(max_depth=4, random_state=4)
-clf.fit(X_train, Y_train)
 
+for key in kernel_accuracy_map.keys():
+    clf = RandomForestClassifier(criterion=key, max_depth=4, random_state=4)
+    clf.fit(X_train, Y_train)
+    kernel_accuracy_map[key] = round(clf.score(X_test, Y_test) * 100, 4)
 
-print("Accuracy (%) :", round(clf.score(X_test, Y_test) * 100, 4))
+print("Accuracy (%) :", kernel_accuracy_map)
 
 
 # ### 6. K-NEAREST NEIGHBOR
