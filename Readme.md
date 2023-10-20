@@ -16,6 +16,17 @@
     - ![Results](./hw4/Plot.png)
 
 
+## :blue_book: Projects for EEE-591
+
+2. [Project 2](./proj2/)
+    - [Question](./proj2/Project_minevsrock.pdf)
+    - [Report](./proj2/proj2.pdf)
+    - [Final Code](./proj2/proj2.py)
+    - Notebooks
+      - [Grid-Search](./proj2/Grid_Search.ipynb)
+      - [Project piece](./proj2/Project-2.ipynb)
+    
+    - ![Results](./proj2/Accuracy_to_components.png)
 ### :snake: Requirements
 
 - [requirements.txt](./requirements.txt)
