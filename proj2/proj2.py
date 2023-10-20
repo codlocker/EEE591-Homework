@@ -22,27 +22,29 @@ def print_rocks_mine(y_test):
             rocks += 1
     print("rocks", rocks," mines",mines)    # print the results
 
+# Extract the data from the csv file.
 data = pd.read_csv('./sonar_all_data_2.csv', header=None)
 
 # data[61].value_counts().plot(kind='bar')
 
+# Get the features and target segregated.
 X = data.drop(columns=[60, 61], axis=1)
 y = data[60]
 
 
-# Split the data into training and testing at 70:30 ratio.
+# 3. Split the data into training and testing at 70:30 ratio.
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
 
 
 # ## Perform Scaling
 
-# 1. Perform Standard Scaling
+# Perform Standard Scaling
 stdscl = StandardScaler()
 X_train_std = stdscl.fit_transform(X_train)
 X_test_std = stdscl.fit_transform(X_test)
 
 
-# ## Run PCA for 1 to 61 features over an MLP Classifier
+# Run PCA for 1 to 60 features over an MLP Classifier
 
 # #### 2) For each number of components used, print the number of components and the accuracy achieved. (Use test accuracy.)
 ## Parameters obtained after running grid search
@@ -51,8 +53,10 @@ ALPHA = 1e-5
 
 # Perform PCA for n features
 accuracy_comp = list()
+
 model = MLPClassifier(hidden_layer_sizes=HIDDEN_LAYER, activation='logistic', max_iter=2000, alpha=ALPHA,
      solver='adam', tol=0.0001, random_state=0)
+
 for idx in range(1, 61):
     pca = PCA(n_components=idx) # only keep idx "best" features!
     X_train_pca = pca.fit_transform(X_train_std) # apply to the train data
