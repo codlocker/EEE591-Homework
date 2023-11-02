@@ -53,7 +53,7 @@ def Idiode(
 #        isat_val (float): Saturation current
 
 #    Returns:
-#        _type_: _description_
+#        np.array: Diode voltage.
 #
 def solve_diode_v(
     prev_v: float,
@@ -123,7 +123,6 @@ source_voltages = np.asarray(source_voltages)
 measured_current = np.asarray(measured_current)
 
 
-
 # Calculate the current in the diode
 #    Args:
 #        A (float): Area
@@ -134,7 +133,7 @@ measured_current = np.asarray(measured_current)
 #        v_s (np.array): source voltages
 #
 #    Returns:
-#        _type_: current in diode
+#        np.array: Diode current.
 #
 def solve_current_diode(
     A: float, 
@@ -235,30 +234,33 @@ def opt_n(n_guess: float,
 
 
 err = 10
-iteration = 1
+iteration = 0
 r_val = R_2
 n_val = IDEALITY
 phi_val = PHI
 current_pred = None
 while err > THRESHOLD and iteration < MAX_ITER:
+    # Increment the iteration count
+    iteration += 1
+
+    # Calculate optimized R
     r_val_opt = leastsq(opt_r, r_val, args=(phi_val, n_val, AREA, T_2, source_voltages, measured_current))
     r_val = r_val_opt[0][0]
     
+    # Calculate optimized ideality(n)
     n_val_opt = leastsq(opt_n, n_val, args=(r_val, phi_val, AREA, T_2, source_voltages, measured_current))
     n_val = n_val_opt[0][0]
     
+    # Calculate optimized phi
     phi_val_opt = leastsq(opt_phi, phi_val, args=(r_val, n_val, AREA, T_2, source_voltages, measured_current))
     phi_val = phi_val_opt[0][0]
     
     current_pred = solve_current_diode(AREA, phi_val, r_val, n_val, T_2, source_voltages)
-    # calc error values array for optimizing result check
+    # calc error values array for optimizing result check as an L1 norm.
     err = np.linalg.norm((current_pred - measured_current) / (current_pred + measured_current + 1e-15), ord = 1)
     
     # Print iteration progress
-    print(f"Iter#: {iteration} ; phi: {phi_val} ; n: {n_val} ; R: {r_val} ; Residual Error: {err}") 
-
-    # Increment the iteration count
-    iteration += 1
+    print(f"Iter#: {iteration} => phi: {phi_val} ; n(ideality): {n_val} ; R(Resistance): {r_val} ; Residual Error: {err}") 
 
 
 
@@ -279,8 +281,8 @@ ax1.set_title("Problem 1 plot")
 ax1.legend()
 
 # Problem 2 graph: Set axes params for the plot
-ax2.set_xlabel("Diode voltage in volts")
-ax2.set_ylabel("Diode current in log scale")
+ax2.set_xlabel("Diode voltage (volts)")
+ax2.set_ylabel("Diode current (log scale)")
 ax2.set_title("Problem 2 plot")
 
 # Plot the given values of Source voltage and diode current in DiodeIV.txt (Actual values)
