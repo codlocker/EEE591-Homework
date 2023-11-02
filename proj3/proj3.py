@@ -241,17 +241,21 @@ n_val = IDEALITY
 phi_val = PHI
 current_pred = None
 while err > THRESHOLD and iteration < MAX_ITER:
+
+    # Calculate optimized R
     r_val_opt = leastsq(opt_r, r_val, args=(phi_val, n_val, AREA, T_2, source_voltages, measured_current))
     r_val = r_val_opt[0][0]
     
+    # Calculate optimized ideality(n)
     n_val_opt = leastsq(opt_n, n_val, args=(r_val, phi_val, AREA, T_2, source_voltages, measured_current))
     n_val = n_val_opt[0][0]
     
+    # Calculate optimized phi
     phi_val_opt = leastsq(opt_phi, phi_val, args=(r_val, n_val, AREA, T_2, source_voltages, measured_current))
     phi_val = phi_val_opt[0][0]
     
     current_pred = solve_current_diode(AREA, phi_val, r_val, n_val, T_2, source_voltages)
-    # calc error values array for optimizing result check
+    # calc error values array for optimizing result check as an L1 norm.
     err = np.linalg.norm((current_pred - measured_current) / (current_pred + measured_current + 1e-15), ord = 1)
     
     # Print iteration progress
