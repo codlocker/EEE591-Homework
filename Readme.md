@@ -27,6 +27,11 @@
       - [Project piece](./proj2/Project-2.ipynb)
     
     - ![Results](./proj2/Accuracy_to_components.png)
+
+3. [Project 3](./proj3/)
+    - [Description](./proj3/DiodeNonlinear_v5c.pdf)
+    - [Code](./proj3/proj3.py)
+    - [Result](./proj3/result.png)
 ### :snake: Requirements
 
 - [requirements.txt](./requirements.txt)
