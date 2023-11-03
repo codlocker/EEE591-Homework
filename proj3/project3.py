@@ -273,7 +273,7 @@ print(f"ESTIMATED Ideality factor (n) : {n_val}")
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
 # Problem 1 graph
-ax1.plot(init_voltage, log_diode_current, label="Source Voltage vs Diode current", marker="*")
+ax1.plot(init_voltage, log_diode_current, label="Source Voltage vs Diode current", marker=".")
 ax1.plot(diode_voltage, log_diode_current, label="Diode Voltage vs Diode current", marker="*")
 ax1.set_ylabel("Diode current (log scale)")
 ax1.set_xlabel("Diode voltage (volts)")
@@ -286,7 +286,7 @@ ax2.set_ylabel("Diode current (log scale)")
 ax2.set_title("Problem 2 plot")
 
 # Plot the given values of Source voltage and diode current in DiodeIV.txt (Actual values)
-ax2.plot(source_voltages, np.log(measured_current), label="Measured Current", marker='*')
+ax2.plot(source_voltages, np.log(measured_current), label="Measured Current", marker='.')
 
 # Plot the given values of diode current and diode voltage in DiodeIV.txt (Predicted values)
 ax2.plot(source_voltages, np.log(current_pred), label="Predicted Current", marker='*')
