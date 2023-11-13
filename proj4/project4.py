@@ -8,6 +8,14 @@ from utils import create_directory, delete_all_files_in_dir, validate_paths
 FAN_RANGE = 9
 NO_OF_INVERTERS = 9
 
+# Generate fan numbers and inverter numbers
+# from max count
+#    Args:
+#        fans (int): the max count
+#        invs (int): the max count
+
+#    Returns:
+#        list: list of fan numbers and inverter numbers
 def generate_fan_inv_list(fans: int, invs: int) -> list:
     # Get the fans count
     fans = [f_idx + 2 for f_idx in range(fans)]
@@ -19,6 +27,13 @@ def generate_fan_inv_list(fans: int, invs: int) -> list:
 
     return fans, inverters
 
+# Creates the new set in the hspice file format.
+# Args:
+#        fan (int): the number of fans in the circuit.
+#        inverters (int): number of inverters in the circuit
+
+# Returns:
+#     str: Return the string for hspice file.
 def create_hspice_format(fan: int, inverters: int) -> str:
     fan_param = f".param fan = {fan}\n"
     cap_load = f".param capacitance = 30pF\n"
@@ -33,12 +48,16 @@ def create_hspice_format(fan: int, inverters: int) -> str:
     
     return fan_param + cap_load + inv_content
 
-################################################################################
-# Run hspice to generate the required output "InvChain.mt0.csv"
-################################################################################
-def run_hspice(input: str, output: str):
+############################################################
+# Run hspice to generate the required output in csv format #
+############################################################
+
 # launch hspice. Note that both stdout and stderr are captured so
 # they do NOT go to the terminal!
+# Args:
+#    input (str): Input file path
+#    output (str): Out file path
+def run_hspice(input: str, output: str):
     proc = subprocess.Popen(["hspice", "-i", input, "-o", output],
                             stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     output, err = proc.communicate()
@@ -58,7 +77,7 @@ if __name__ == "__main__":
     create_directory(input_files)
     create_directory(output_files)
 
-    # 0.3 Delete all existing files in that path for easy view.
+    # 0.3 Delete all existing files in that path to avoid overwriting issues.
     delete_all_files_in_dir(input_files)
     delete_all_files_in_dir(output_files)
 
