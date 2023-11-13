@@ -32,6 +32,23 @@
     - [Description](./proj3/DiodeNonlinear_v5c.pdf)
     - [Code](./proj3/proj3.py)
     - ![Result](./proj3/result.png)
+
+4. [Project 4](./proj4/)
+    - [Description](./proj4/Project%204.pdf)
+    - [Code](./proj4/project4.py)
+
+    Steps for the setting up project 4 via scp
+
+    - Create a folder named **Proj 4** in the machine in which you have logged in
+    - In the **Proj 4** folder scp the following files 'cmoslibrary.lib', 'project4.py', 'utils.py', 'InvChainTemplate.sp'. All the files should be in the same Proj 4 folder and in the same subtree.
+      - scp project4.py utils.py cmoslibrary.lib InvChainTemplate.sp <target_remote_path>/Proj_4
+      - ![Inst Result](./proj4_inst.PNG)
+    - Run project4.py as follows
+        
+        ```python3 project4.py```
+    - After execution is complete, you can delete the Proj_4 folder using 
+        ```rm -r Proj_4/```
+
 ### :snake: Requirements
 
 - [requirements.txt](./requirements.txt)
