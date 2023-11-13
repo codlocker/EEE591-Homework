@@ -36,8 +36,5 @@ Vvcc vcc! 0 DC = 3V
 
 .measure TRAN tphl_inv  TRIG v(Xinv1.a) VAL = 1.5 RISE = 1 TARG v(z) VAL=1.5 FALL = 1
 
-.param fan = 2
-.param capacitance = 30pF
-Xinv1 a b inv M=1
-Xinv2 b c inv M=fan**1
-Xinv3 c z inv M=fan**2
+<new_string>
+.end
