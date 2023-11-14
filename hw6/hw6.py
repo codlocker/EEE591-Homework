@@ -12,11 +12,9 @@ def calculate_radius() -> float:
     return np.sqrt(np.power(x, 2) + np.power(y, 2))
 
 if __name__ == "__main__":
-    estimated_pi_vals = list()
-
     for precision in PRECISIONS:
-        print(f'At precision level : {precision}')
-
+        pi_vals = 0
+        success_count = 0
         for _ in range(NO_OF_TRIALS):
             inside = 0
 
@@ -28,7 +26,11 @@ if __name__ == "__main__":
             
             pi_val = 4.0 * (inside) / MAX_POINTS_IN_TRIAL
 
-            if (pi_val - np.pi) < MAX_POINTS_IN_TRIAL:
-                estimated_pi_vals.append(pi_val)
+            if abs(pi_val - np.pi) < precision:
+                pi_vals += pi_val
+                success_count += 1
 
-        print(f'Estimated value of PI = {np.average(estimated_pi_vals)}')
+        if success_count > 0:
+            print(f'{precision} success {success_count} times {pi_vals / success_count}')
+        else:
+            print(f"{precision} no success")
