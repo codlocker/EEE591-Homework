@@ -17,6 +17,8 @@
 
 5. [Homework 5](./hw5/)
     - ![results](./hw5/hw5-results.PNG)
+6. [Homework 6](./hw6/)
+    - ![results](./hw6/hw6.PNG)
 ## :blue_book: Projects for EEE-591
 
 2. [Project 2](./proj2/)
