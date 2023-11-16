@@ -36,7 +36,6 @@ def generate_fan_inv_list(fans: int, invs: int) -> list:
 #     str: Return the string for hspice file.
 def create_hspice_format(fan: int, inverters: int) -> str:
     fan_param = f".param fan = {fan}\n"
-    cap_load = f".param capacitance = 30pF\n"
     inv_content = "Xinv1 a b inv M=1\n"
     last_index = 0
     for inv in range(inverters - 2):
@@ -46,7 +45,7 @@ def create_hspice_format(fan: int, inverters: int) -> str:
     if inverters > 1:
         inv_content += f"Xinv{str(last_index + 2)} {chr(97 + (last_index + 1))} z inv M=fan**{str(last_index + 1)}"
     
-    return fan_param + cap_load + inv_content
+    return fan_param + inv_content
 
 ############################################################
 # Run hspice to generate the required output in csv format #
