@@ -60,7 +60,6 @@ def run_hspice(input: str, output: str):
     proc = subprocess.Popen(["hspice", "-i", input, "-o", output],
                             stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     output, err = proc.communicate()
-    print(err)
 
 if __name__ == "__main__":
     ## 0. Create a directory for inputs and validate if all files exists in the folder
