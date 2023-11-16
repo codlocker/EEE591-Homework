@@ -17,7 +17,7 @@ Lab 1 Problem 1A
   m2 Z A vcc! vcc! pmos w=(1.4u*alpha) l=0.35u AD=0.7p*alpha  
 .ends 
 
-Cload z gnd! 10pF
+Cload z gnd! 30pF
 
 Vin a gnd! 0V PWL 0 0NS 1NS 3 20NS 3
 
