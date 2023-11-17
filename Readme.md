@@ -39,7 +39,8 @@
 4. [Project 4](./proj4/)
     - [Description](./proj4/Project%204.pdf)
     - [Code](./proj4/project4.py)
-    - ![image](https://github.com/codlocker/EEE591-Homework/assets/12949012/a5622b80-e331-410b-a5c7-119283cefb9c)
+    - ![image](https://github.com/codlocker/EEE591-Homework/assets/12949012/94beba5d-ed1e-4af7-8942-244fb7b4004c)
+
 
 
     Steps for the setting up project 4 via scp
