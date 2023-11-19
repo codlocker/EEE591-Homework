@@ -19,6 +19,9 @@
     - ![results](./hw5/hw5-results.PNG)
 6. [Homework 6](./hw6/)
     - ![results](./hw6/hw6.PNG)
+7. [Homework 7](./hw7/)
+    - ![image](https://github.com/codlocker/EEE591-Homework/assets/12949012/24f2cd35-9668-468a-9fc5-91a38cc29dea)
+
 ## :blue_book: Projects for EEE-591
 
 2. [Project 2](./proj2/)
