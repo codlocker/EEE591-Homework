@@ -134,15 +134,27 @@ def ensemble_prediction(algo_predictions: list, true_labels: np.array, is_print:
 
 # Run ensemble of the 3 best methods
 ensemble_3 = [raf_predict, knn_predict, svm_predict]
-print(f'Accuracy of ensemble predictions using Random Forest, KNN and SVM = {ensemble_prediction(ensemble_3, Y_test)}%')
+accuracy_3 = ensemble_prediction(ensemble_3, Y_test)
+print(f'Accuracy of ensemble predictions using Random Forest, KNN and SVM = {accuracy_3}%')
 
 
 # Run ensemble of the 4 best methods
 ensemble_4 = [raf_predict, knn_predict, svm_predict, perceptron_predict]
-print(f'Accuracy of ensemble predictions using Random Forest, KNN, perceptron and SVM = {ensemble_prediction(ensemble_4, Y_test, True)}%')
+accuracy_4 = ensemble_prediction(ensemble_4, Y_test, True)
+print(f'Accuracy of ensemble predictions using Random Forest, KNN, perceptron and SVM = {accuracy_4}%')
+
+if accuracy_4 > accuracy_3:
+    print(f"Accuracy of ensemble of 4 methods improved over ensemble of 3.")
+else:
+    print(f"Accuracy of ensemble of 4 methods did not improve over ensemble of 3.")
 
 
 # Run ensemble of the 5 best methods
 ensemble_5 = [raf_predict, knn_predict, svm_predict, perceptron_predict, logistic_predict]
-print(f'Accuracy of ensemble predictions using Random Forest, KNN, Logistic, Perceptron and SVM = {ensemble_prediction(ensemble_5, Y_test)}%')
+accuracy_5 = ensemble_prediction(ensemble_5, Y_test)
+print(f'Accuracy of ensemble predictions using Random Forest, KNN, Logistic, Perceptron and SVM = {accuracy_5}%')
 
+if accuracy_5 > accuracy_4:
+    print(f"Accuracy of ensemble of 5 methods improved over ensemble of 4.")
+else:
+    print(f"Accuracy of ensemble of 5 methods did not improve over ensemble of 4.")
