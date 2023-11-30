@@ -12,6 +12,7 @@
 
 import numpy as np
 import pandas as pd
+import os
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -28,7 +29,12 @@ from sklearn.preprocessing import StandardScaler
 
 
 # Read the dataset
-heart_df = pd.read_csv('./heart1.csv')
+heart_df = None
+if os.path.exists('heart1.csv'):
+    heart_df = pd.read_csv('heart1.csv')
+else:
+    print('File heart1.csv not found. It should be in the same path as this python file')
+    exit(-1)
 
 
 # Split the data X and Y. Y being the target variable.
@@ -123,9 +129,9 @@ def ensemble_prediction(algo_predictions: list, true_labels: np.array, is_print:
         elif np.count_nonzero(pred == 2) > np.count_nonzero(pred == 1):
             final_preds[idx] = 2
         else:
-            final_preds[idx] = np.random.choice([1, 2])
+            final_preds[idx] = 2
             if is_print:
-                print(f'Found a tie : Selected choice : {int(final_preds[idx])} as target class')
+                print(f'Found a tie : Selected choice : {"Yes" if int(final_preds[idx]) == 2 else "No"} as target class')
     
     return np.round(accuracy_score(final_preds, true_labels) * 100, 4)
 
@@ -141,7 +147,7 @@ print(f'Accuracy of ensemble predictions using Random Forest, KNN and SVM = {acc
 # Run ensemble of the 4 best methods
 ensemble_4 = [raf_predict, knn_predict, svm_predict, perceptron_predict]
 accuracy_4 = ensemble_prediction(ensemble_4, Y_test, True)
-print(f'Accuracy of ensemble predictions using Random Forest, KNN, perceptron and SVM = {accuracy_4}%')
+print(f'Accuracy of ensemble predictions using Random Forest, KNN, perceptron and SVM (Ties counted as Yes) = {accuracy_4}%')
 
 if accuracy_4 > accuracy_3:
     print(f"Accuracy of ensemble of 4 methods improved over ensemble of 3.")
